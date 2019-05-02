@@ -1,31 +1,9 @@
-<<<<<<< HEAD
-# FireCrud
+Firebase was used as database server. You can go https://console.firebase.google.com/ to create your own database and use it in your project.
+CRUD is performed i.e. you can create, read, update and delete operation in this app.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-=======
-# Angular7-CRUD-using-Firebase
->>>>>>> eb3d5fa61b3ba4a68a78e77612527b71256e2675
+Step 1: clone the repo to your desired folder
+Step 2: initial setup for angular- follow https://angular.io/guide/quickstart.
+Step 3: install firebase, using npm install firebase@5.0.3 @angular/fire@5.0.2
+step 4: create new database in firestore and click on the web icon, it pops up and show you "add firebase to your web app", copy the value of config to your app in app/sr/environments/environment.ts file right below the "production: false," name a property like "firebase" and add the copied value
+Step 5: Run ng-serve -o
+step 6: Hurrah
