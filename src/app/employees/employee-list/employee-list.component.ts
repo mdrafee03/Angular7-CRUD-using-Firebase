@@ -11,34 +11,33 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EmployeeListComponent implements OnInit {
   emps: Employee[];
-
-  constructor( 
-    private service: EmployeeService,
-    private firestore: AngularFirestore,
-    private toastr: ToastrService ) { }
+  searchText = '';
+  constructor(private service: EmployeeService) { }
 
   ngOnInit() {
-    this.getEmployees()
+    this.getEmployees();
   }
 
   getEmployees(): void {
-    this.service.getEmployees().subscribe(res=>{
-      this.emps = res.map(item=>{
+    this.service.getEmployees().subscribe(res => {
+      this.emps = res.map(item => {
         return {
           id: item.payload.doc.id,
-          ...item.payload.doc.data()} as Employee;
-      })
-    })
+          ...item.payload.doc.data()
+        } as Employee;
+      });
+    });
   }
   onEdit(emp: Employee) {
-    this.service.formData = Object.assign({}, emp);
+    this.service.loadForm(emp);
   }
- 
-  onDelete(id: string) {
-    if (confirm("Are you sure to delete this record?")) {
-      this.firestore.doc('employees/' + id).delete();
-      this.toastr.warning('Deleted successfully','EMP. Register');
-    }
+
+  onDelete(empId: number) {
+    this.service.deleteEmployee(empId);
+  }
+
+  onSearch(employee: Employee) {
+    return employee.fullName.toLowerCase().indexOf(this.searchText.toLowerCase()) !== -1;
   }
 
 

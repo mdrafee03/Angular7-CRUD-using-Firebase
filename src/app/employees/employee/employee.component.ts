@@ -10,36 +10,24 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
+  submitted: boolean;
+  formControls = this.service.form.controls;
+  constructor( private service: EmployeeService ) { }
+  ngOnInit() { }
 
-  constructor(
-    private service: EmployeeService,
-    private firestore: AngularFirestore,
-    private toastr: ToastrService,
-  ) { }
-
-  ngOnInit() {
-    this.resetForm();
-  }
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
-    this.service.formData = {
-      id: null,
-      fullname: '',
-      position: '',
-      empcode: '',
-      mobile: ''
+  onSubmit() {
+    this.submitted = true;
+    const data = this.service.form.value;
+    const id = this.service.form.value.id;
+    delete data.id;
+    if (this.service.form.valid) {
+      if (this.service.form.get('id').value == null) {
+        this.service.createEmployee(data);
+      } else {
+        this.service.updateEmployee(id, data);
+      }
+      this.service.form.reset();
+      this.submitted = false;
     }
   }
-
-  onSubmit(form: NgForm) {
-    let data = Object.assign({}, form.value);
-    delete data.id;
-    if (form.value.id == null)
-      this.firestore.collection('employees').add(data);
-    else
-      this.firestore.doc('employees/'+form.value.id).update(data);
-    this.resetForm(form);
-  }
-
 }

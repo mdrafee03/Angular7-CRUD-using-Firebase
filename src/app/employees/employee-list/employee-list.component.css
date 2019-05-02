@@ -3,3 +3,6 @@
 table.table-hover tbody tr:hover{
     cursor: pointer;
 }
+.table td, .table th {
+    text-align: center;   
+ }

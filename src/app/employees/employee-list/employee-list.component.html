@@ -1,16 +1,28 @@
+<form class="form-inline">
+  <input class="form-control" name="searchInput" placeholder="Search" #searchInput="ngModel" [(ngModel)]="searchText"
+    style="width: 80%;">
+  <button class="btn btn-outline-dark" (click)="searchText=''"><i class="fas fa-window-close"></i></button>
+</form>
 <table class="table table-hover">
   <thead>
     <th>Name</th>
     <th>Position</th>
     <th>Mobile</th>
-    <th></th>
+    <th>location</th>
+    <th>Action</th>
   </thead>
   <tbody>
-    <tr *ngFor="let emp of emps">
-      <td (click)="onEdit(emp)">{{emp.empCode}} - {{emp.fullName}}</td>
-      <td (click)="onEdit(emp)">{{emp.position}}</td>
-      <td (click)="onEdit(emp)">{{emp.mobile}}</td>
-      <td><a class="btn text-danger" (click)="onDelete(emp.id)"><i class="fa fa-trash"></i></a></td>
-    </tr>
+    <ng-container *ngFor="let emp of emps">
+      <tr *ngIf="onSearch(emp)">
+        <td>{{emp.fullName}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.mobile}}</td>
+        <td>{{emp.location}}</td>
+        <td class="btn-group">
+          <a class="btn text-info" (click)="onEdit(emp)"><i class="far fa-edit"></i></a>
+          <a class="btn text-danger" (click)="onDelete(emp.id)"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>
